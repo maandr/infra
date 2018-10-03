@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3"
 
 services:
 
@@ -9,9 +9,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - type: bind
-        source: /config/nginx/nginx.conf
-        target: /etc/nginx/nginx.conf
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/sites-available:/etc/nginx/sites-available/default
+      - certifcates-datavolume:/certs
 
   mysql:
     image: mysql:5.7
@@ -19,13 +19,51 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 123
-      MYSQL_USER: 'wl'
-      MYSQL_PASS: 'wl'
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_USER=wl
+      - MYSQL_PASS=wl
     volumes:
-      - type: volume
-        source: mysql-datavolume
-        target: /var/lib/mysql
+      - mysql-datavolume:/var/lib/mysql
+      - certifcates-datavolume:/certs
+
+  concourse-db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=concourse
+      - POSTGRES_PASSWORD=concourse_pass
+      - POSTGRES_USER=concourse_user
+      - PGDATA=/database
+  
+  concourse-web:
+    image: concourse/concourse
+    command: web
+    links: [concourse-db]
+    depends_on: [concourse-db]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keys/web:/concourse-keys
+    environment:
+      - CONCOURSE_POSTGRES_HOST=concourse-db
+      - CONCOURSE_POSTGRES_USER=concourse_user
+      - CONCOURSE_POSTGRES_PASSWORD=concourse_pass
+      - CONCOURSE_POSTGRES_DATABASE=concourse
+      - CONCOURSE_EXTERNAL_URL
+      - CONCOURSE_ADD_LOCAL_USER=test:$$2a$$10$$0W9/ilCpYXY/yCPpaOD.6eCrGda/fnH3D4lhsw1Mze0WTID5BuiTW
+      - CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS=true
+
+  concourse-worker:
+    image: concourse/concourse
+    command: worker
+    privileged: true
+    links: [concourse-web]
+    depends_on: [concourse-web]
+    volumes:
+      - ./keys/worker:/concourse-keys
+    environment:
+      - CONCOURSE_TSA_HOST=concourse-web:2222
+      - CONCOURSE_GARDEN_NETWORK
 
 volumes:
+  certifcates-datavolume:
   mysql-datavolume:
