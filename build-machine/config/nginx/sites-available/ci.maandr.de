@@ -1,12 +1,5 @@
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	server_name ci.maandr.de;
-	return 301 https://ci.maandr.de;
-}
-
-server {
-        listen 443;
+        listen 80;
 
         server_name ci.maandr.de;
 

@@ -13,6 +13,7 @@ services:
     volumes:
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./config/nginx/sites-available/:/etc/nginx/sites-available/
+      - ./config/nginx/sites-available/:/etc/nginx/sites-enabled/
       - certifcates-datavolume:/certs
 
   mysql:
