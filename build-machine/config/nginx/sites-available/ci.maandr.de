@@ -1,9 +1,9 @@
 server {
-        listen 80;
+    listen 80;
 
-        server_name ci.maandr.de;
+    server_name ci.maandr.de;
 
-        location / {
-                proxy_pass http://concourse-web:8080;
-        }
+    location / {
+        proxy_pass http://concourse-web:8080;
+    }
 }
