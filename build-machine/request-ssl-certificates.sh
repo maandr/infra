@@ -13,7 +13,7 @@ docker run -it --rm \
     --register-unsafely-without-email --agree-tos \
     --webroot-path=/data/letsencrypt \
     --staging \
-    -d maandr.de
+    -d maandr.de \
     -d www.maandr.de
 
 exit 0
