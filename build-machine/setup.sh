@@ -21,7 +21,7 @@ printf "${yellow}updating packages to latest versions..${normal}\n"
 apt-get upgrade -y
 
 # install dependencies
-dependencies="git git-crypt vim docker-ce make g++"
+dependencies="git vim docker-ce make g++"
 for app in ${dependencies}
 do
     printf "\n\n"
@@ -37,6 +37,8 @@ printf "\n\n"
 printf "${yellow}installing docker-compose..${normal}\n"
 curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" \
     -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
 printf "\ninstalled version: "
 docker-compose --version
 
