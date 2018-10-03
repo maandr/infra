@@ -3,7 +3,7 @@
 yellow=$(tput setaf 3)
 normal=$(tput sgr0)
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+script_dir=$(cd "$(dirname "$0")" && pwd)
 project_dir=$(dirname "${script_dir}")
 
 . ${project_dir}/.secrets
