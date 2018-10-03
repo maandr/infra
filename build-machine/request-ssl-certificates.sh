@@ -7,7 +7,7 @@ docker run -it --rm \
     -v /docker-volumes/certs:/etc/letsencrypt \
     -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
     -v /docker-volumes/var/log/letsencrypt:/var/log/letsencrypt \
-    -v /static:/static \
+    -v ./static:/static \
     certbot/certbot \
     certonly --webroot \
     --register-unsafely-without-email --agree-tos \
