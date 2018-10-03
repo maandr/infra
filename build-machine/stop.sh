@@ -1,3 +1,11 @@
 #!/bin/sh
 
-docker-compose -f ./docker-compose.yml down
+yellow=$(tput setaf 3)
+normal=$(tput sgr0)
+
+script_dir=$(dirname $(readlink -f "$0"))
+compose_file="${script_dir}/docker-compose.yml"
+
+printf "\n\n"
+printf "${yellow}stopping containers..${normal}\n"
+docker-compose --file ${compose_file} stop
