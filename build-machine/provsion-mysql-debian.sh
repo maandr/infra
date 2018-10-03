@@ -1,7 +1,5 @@
 #!/bin/sh
 
--e # Exit immediately if a command exits with a non-zero status.
-
 yellow=$(tput setaf 3)
 normal=$(tput sgr0)
 
