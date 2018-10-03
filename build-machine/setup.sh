@@ -52,3 +52,7 @@ cd ..
 rm -rf git-crypt
 printf "\ninstalled version: "
 git-crypt --version
+
+printf "\n\n"
+printf "${green}success.${normal}\n"
+exit 0
