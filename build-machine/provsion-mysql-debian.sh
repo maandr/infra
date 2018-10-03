@@ -10,7 +10,7 @@ project_dir=$(dirname "${script_dir}")
 
 printf "\n\n"
 printf "${yellow}uninstall any existing mysql packages..${normal}"
-apt-get remove --purge mysql\*
+apt-get remove -y --purge mysql\*
 apt-get clean
 updatedb
 
@@ -20,9 +20,12 @@ apt-get install -y libmysqlclient-dev mysql-client
 
 printf "\n\n"
 printf "${yellow}install mysql-server..${normal}"
-spt-get update
-apt-get install -y mysql-server-5.6
+apt-get install -y mysql-server
 mysql --version
+
+printf "\n\n"
+printf "${yellow}testing mysql service..${normal}"
+systemctl status mysql.service
 
 printf "\n\n"
 printf "${yellow}securing mysql-server..${normal}"
@@ -32,10 +35,6 @@ mysql -e "DROP USER ''@'localhost'"
 mysql -e "DROP USER ''@'$(hostname)'"
 mysql -e "DROP DATABASE test"
 mysql -e "FLUSH PRIVILEGES"
-
-printf "\n\n"
-printf "${yellow}testing mysql service..${normal}"
-systemctl status mysql.service
 
 printf "\n\n"
 printf "${yellow}connect to mysql service..${normal}"
