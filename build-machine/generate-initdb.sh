@@ -14,7 +14,7 @@ do
     password=$(echo $pair | cut -d':' -f 2)
 
     statement="${statement} 
-    CREATE DATABASE IF NOT EXISTS '${candidate}' CHARACTER SET 'utf8';
+    CREATE DATABASE IF NOT EXISTS ${candidate} CHARACTER SET 'utf8';
     CREATE USER IF NOT EXISTS '${candidate}'@'%';
     GRANT ALL PRIVILEGES ON ${candidate}.* TO '${candidate}'@'%' IDENTIFIED BY '${password}';
     "
