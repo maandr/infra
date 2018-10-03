@@ -2,7 +2,7 @@
 
 script_dir=$(dirname $(readlink -f "$0"))
 project_dir="$(dirname ${script_dir})"
-mysql_config_dir="${script_dir}/config/mysql/"
+mysql_config_dir="${script_dir}/config/mysql"
 
 candidates="$(${project_dir}/util/secret-value.sh mysql_generate_databases)"
 
