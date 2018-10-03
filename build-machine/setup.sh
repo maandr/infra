@@ -62,6 +62,10 @@ printf "${yellow}unlocking repository..${normal}\n"
 git-crypt unlock ~/.ssh/infra.key
 
 printf "\n\n"
+printf "${yellow}generating database init scripts..${normal}\n"
+./generate-initdb.sh
+
+printf "\n\n"
 printf "${green}success.${normal}\n"
 
 exit 0

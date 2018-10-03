@@ -27,6 +27,7 @@ services:
       - MYSQL_USER=wl
       - MYSQL_PASS=wl
     volumes:
+      - ./config/mysql/initdb:/docker-entrypoint-initdb.d
       - mysql-datavolume:/var/lib/mysql
       - certifcates-datavolume:/certs
 
