@@ -15,7 +15,7 @@ services:
       - ./static:/static
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./config/nginx/sites-available/:/etc/nginx/sites-available/
-      - /docker-volumes/certs:/certs
+      - /docker-volumes/certs/live/maandr.de:/certs
 
   mysql:
     image: mysql:5.7
@@ -28,7 +28,6 @@ services:
     volumes:
       - ./config/mysql/initdb:/docker-entrypoint-initdb.d
       - /docker-volumes/mysql:/var/lib/mysql
-      - /docker-volumes/certs:/certs
 
   concourse-db:
     image: postgres
