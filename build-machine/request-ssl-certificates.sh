@@ -7,11 +7,11 @@ docker run -it --rm \
     -v /docker-volumes/certs:/etc/letsencrypt \
     -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
     -v /docker-volumes/var/log/letsencrypt:/var/log/letsencrypt \
-    -v /static:/data/letsencrypt \
+    -v /static:/static \
     certbot/certbot \
     certonly --webroot \
     --register-unsafely-without-email --agree-tos \
-    --webroot-path=/data/letsencrypt \
+    --webroot-path=/static \
     --staging \
     -d maandr.de \
     -d www.maandr.de
