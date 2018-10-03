@@ -1,4 +1,4 @@
-version: '3'
+version: "3.2"
 
 services:
 
@@ -9,7 +9,9 @@ services:
       - "80:80"
       - "443:443"
   volumes:
-    - /config/nginx/:/etc/nginx/
+    - type: bind
+      source: /config/nginx
+      target: /etc/nginx
 
   mysql:
     image: mysql:5.7
@@ -21,7 +23,9 @@ services:
       MYSQL_USER: 'wl'
       MYSQL_PASS: 'wl'
     volumes:
-      - mysql-datavolume:/var/lib/mysql
+      - type: volume
+        source: mysql-datavolume
+        target: /var/lib/mysql
 
 volumes:
   mysql-datavolume:
