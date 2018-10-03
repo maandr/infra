@@ -4,6 +4,6 @@ server {
         server_name ci.maandr.de;
 
         location / {
-                proxy_pass http://concourse:8080;
+                proxy_pass http://concourse-web:8080;
         }
 }
