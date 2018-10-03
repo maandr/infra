@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_USER: 'wl'
+      MYSQL_PASS: 'wl'
+    volumes:
+      - mysql-datavolume:/var/lib/mysql
+
+volumes:
+  mysql-datavolume:
