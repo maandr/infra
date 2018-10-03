@@ -54,5 +54,10 @@ printf "\ninstalled version: "
 git-crypt --version
 
 printf "\n\n"
+printf "${yellow}generating concourse keys..${normal}\n"
+./generate-keys.sh
+
+printf "\n\n"
 printf "${green}success.${normal}\n"
+
 exit 0
