@@ -31,16 +31,21 @@ systemctl status mysql.service
 printf "\n\n"
 printf "${yellow}securing mysql-server..${normal}"
 
-mysql -e "DROP USER ''@'localhost'"
-mysql -e "DROP USER ''@'$(hostname)'"
-mysql -e "DROP DATABASE test"
-mysql -e "FLUSH PRIVILEGES"
+mysql -u ${mysql_root_user} -p${mysql_root_password} \
+    -e " \
+        DROP USER ''@'localhost'; \
+        DROP USER ''@'$(hostname)'; \
+        DROP DATABASE test; \
+        FLUSH PRIVILEGES; \
+    "
 
 printf "\n\n"
 printf "${yellow}connect to mysql service..${normal}"
+printf "\n"
 mysql -u ${mysql_root_user} -p${mysql_root_password} \
     -e "SELECT host, user from mysql.user;"
 
 printf "\n\n"
-printf "verifying port is open to allow remote access to mysql.."
+printf "${yellow}verifying port 3306 is open..${normal}"
+ufw allow 3306
 nc -vz ${mysql_hostname} ${mysql_port}
