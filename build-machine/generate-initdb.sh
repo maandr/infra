@@ -13,15 +13,14 @@ do
     candidate=$(echo $pair | cut -d':' -f 1)
     password=$(echo $pair | cut -d':' -f 2)
 
-    statement="${statement} 
-    CREATE DATABASE IF NOT EXISTS ${candidate} CHARACTER SET 'utf8';
-    CREATE USER IF NOT EXISTS '${candidate}'@'%';
-    GRANT ALL PRIVILEGES ON ${candidate}.* TO '${candidate}'@'%' IDENTIFIED BY '${password}';
-    "
+    statement="${statement}
+CREATE DATABASE IF NOT EXISTS ${candidate} CHARACTER SET 'utf8';
+CREATE USER IF NOT EXISTS '${candidate}'@'%';
+GRANT ALL PRIVILEGES ON ${candidate}.* TO '${candidate}'@'%' IDENTIFIED BY '${password}';
+"
 done
 
 echo "${statement}
-
-    FLUSH PRIVILEGES;" > ${mysql_config_dir}/initdb/init-databases-and-users.sql
+FLUSH PRIVILEGES;" > ${mysql_config_dir}/initdb/init-databases-and-users.sql
 
 exit 0
