@@ -3,7 +3,9 @@ server {
 
     server_name maandr.de www.maandr.de;
 
+    root /static
+    index app.html
+
     location / {
-        return 200;
     }
 }
