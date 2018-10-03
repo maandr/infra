@@ -20,6 +20,8 @@ apt-get install -y libmysqlclient-dev mysql-client
 
 printf "\n\n"
 printf "${yellow}install mysql-server..${normal}"
+debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_root_password}"
+debconf-set-selections <<< "mysql-server mysql-server/root_password_again ${mysql_root_password}"
 apt-get install -y mysql-server
 mysql --version
 
@@ -30,7 +32,6 @@ systemctl status mysql.service
 printf "\n\n"
 printf "${yellow}securing mysql-server..${normal}"
 
-mysql -e "UPDATE mysql.user SET Password = PASSWORD('${mysql_password}') WHERE User = 'root'"
 mysql -e "DROP USER ''@'localhost'"
 mysql -e "DROP USER ''@'$(hostname)'"
 mysql -e "DROP DATABASE test"
