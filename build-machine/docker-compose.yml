@@ -15,7 +15,7 @@ services:
       - ./static:/static
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./config/nginx/sites-available/:/etc/nginx/sites-available/
-      - certifcates-datavolume:/certs
+      - /docker-volumes/certs:/certs
 
   mysql:
     image: mysql:5.7
@@ -27,8 +27,8 @@ services:
       - MYSQL_ROOT_PASSWORD=123
     volumes:
       - ./config/mysql/initdb:/docker-entrypoint-initdb.d
-      - mysql-datavolume:/var/lib/mysql
-      - certifcates-datavolume:/certs
+      - /docker-volumes/mysql:/var/lib/mysql
+      - /docker-volumes/certs:/certs
 
   concourse-db:
     image: postgres
@@ -68,7 +68,3 @@ services:
     environment:
       - CONCOURSE_TSA_HOST=concourse-web:2222
       - CONCOURSE_GARDEN_NETWORK
-
-volumes:
-  certifcates-datavolume:
-  mysql-datavolume:
