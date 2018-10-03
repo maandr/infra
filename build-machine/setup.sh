@@ -66,6 +66,10 @@ printf "${yellow}generating database init scripts..${normal}\n"
 ./generate-initdb.sh
 
 printf "\n\n"
+printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
+./request-ssl-certificates.sh
+
+printf "\n\n"
 printf "${green}success.${normal}\n"
 
 exit 0
