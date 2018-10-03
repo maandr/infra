@@ -10,8 +10,8 @@ services:
       - "443:443"
     volumes:
       - type: bind
-        source: /config/nginx
-        target: /etc/nginx
+        source: /config/nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
 
   mysql:
     image: mysql:5.7
