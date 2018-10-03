@@ -1,0 +1,9 @@
+server {
+        listen 80;
+
+        server_name maandr.de www.maandr.de;
+
+        location / {
+            return 200;
+        }
+}
