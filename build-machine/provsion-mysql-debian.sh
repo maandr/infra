@@ -12,7 +12,6 @@ printf "\n\n"
 printf "${yellow}uninstall any existing mysql packages..${normal}"
 apt-get remove -y --purge mysql\*
 apt-get clean
-updatedb
 
 printf "\n\n"
 printf "${yellow}install mysql-client..${normal}"
@@ -20,8 +19,8 @@ apt-get install -y libmysqlclient-dev mysql-client
 
 printf "\n\n"
 printf "${yellow}install mysql-server..${normal}"
-debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_root_password}"
-debconf-set-selections <<< "mysql-server mysql-server/root_password_again ${mysql_root_password}"
+echo "mysql-server mysql-server/root_password password ${mysql_root_password}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${mysql_root_password}" | debconf-set-selections
 apt-get install -y mysql-server
 mysql --version
 
