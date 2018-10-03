@@ -5,6 +5,8 @@ services:
   nginx:
     image: nginx:alpine
     restart: always
+    depends_on: [ concourse-web ]
+    links: [ concourse-web ]
     ports:
       - "80:80"
       - "443:443"
@@ -37,8 +39,8 @@ services:
   concourse-web:
     image: concourse/concourse
     command: web
-    links: [concourse-db]
-    depends_on: [concourse-db]
+    links: [ concourse-db ]
+    depends_on: [ concourse-db ]
     ports:
       - "8080:8080"
     volumes:

@@ -16,3 +16,5 @@ ssh-keygen -y -f  ./keys/worker/worker_key &gt; ./keys/worker/worker_key.pub
 
 cp ./keys/worker/worker_key.pub ./keys/web/authorized_worker_keys
 cp ./keys/web/tsa_host_key.pub ./keys/worker
+
+exit 0
