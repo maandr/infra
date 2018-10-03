@@ -15,7 +15,8 @@ services:
       - ./static:/static
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./config/nginx/sites-available/:/etc/nginx/sites-available/
-      - /docker-volumes/certs/live/maandr.de:/certs
+      - "/docker-volumes/certs/live/maandr.de/fullchain.pem:/certs/fullchain.pem"
+      - "/docker-volumes/certs/live/maandr.de/privkey.pem:/certs/privkey.pem"
 
   mysql:
     image: mysql:5.7
