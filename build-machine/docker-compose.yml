@@ -34,10 +34,10 @@ services:
     image: postgres
     container_name: concourse-db
     environment:
-      - POSTGRES_DB=${concourse_db_username}
+      - POSTGRES_DB=${concourse_db_database}
       - POSTGRES_USER=${concourse_db_username}
       - POSTGRES_PASSWORD=${concourse_db_password}
-      - PGDATA=/${concourse_db_database}
+      - PGDATA=/database
   
   concourse-web:
     container_name: concourse-web
