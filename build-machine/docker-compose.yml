@@ -37,7 +37,7 @@ services:
       - POSTGRES_DB=${concourse_db_username}
       - POSTGRES_USER=${concourse_db_username}
       - POSTGRES_PASSWORD=${concourse_db_password}
-      - PGDATA=/database
+      - PGDATA=/${concourse_db_database}
   
   concourse-web:
     container_name: concourse-web
@@ -53,7 +53,7 @@ services:
       - CONCOURSE_POSTGRES_PASSWORD=${concourse_db_password}
       - CONCOURSE_POSTGRES_DATABASE=${concourse_db_database}
       - CONCOURSE_EXTERNAL_URL
-      - CONCOURSE_ADD_LOCAL_USER=${concourse_user_and_password}
+      - CONCOURSE_ADD_LOCAL_USER=${concourse_user}:${concourse_password}
       - CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS=true
 
   concourse-worker:
