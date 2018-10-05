@@ -6,6 +6,9 @@ green=$(tput setaf 2)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
 
+script_dir=$(dirname $(readlink -f "$0"))
+project_dir="$(dirname ${script_dir})"
+
 printf " ---------------------------------------\n"
 printf " ${yellow}setup machine for infra${normal}\n"
 printf " ---------------------------------------\n"
@@ -68,6 +71,11 @@ printf "${yellow}generating database init scripts..${normal}\n"
 printf "\n\n"
 printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
 ./request-ssl-certificates.sh
+
+printf "\n\n"
+printf "${yellow}setup cronjob for cetificate renewal..${normal}\n"
+(crontab -l 2>/dev/null; echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh") | crontab -
+crontab -l
 
 printf "\n\n"
 printf "${green}success.${normal}\n"
