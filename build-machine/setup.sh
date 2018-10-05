@@ -69,6 +69,15 @@ printf "${yellow}generating database init scripts..${normal}\n"
 ./generate-initdb.sh
 
 printf "\n\n"
+printf "${yellow}starting infrastructure..${normal}\n"
+./start.sh
+
+printf "\n\n"
+printf "${yellow}waiting for all components to have finished startup..${normal}\n"
+sleep 10
+./status.sh
+
+printf "\n\n"
 printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
 ./request-ssl-certificates.sh
 
