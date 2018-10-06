@@ -14,6 +14,12 @@ printf " ${yellow}setup machine for infra${normal}\n"
 printf " ---------------------------------------\n"
 
 printf "\n\n"
+printf "${yellow}add additional package repositories..${normal}\n"
+CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+printf "\n\n"
 printf "${yellow}updating package cache..${normal}\n"
 
 apt-get update
@@ -24,7 +30,7 @@ printf "${yellow}updating packages to latest versions..${normal}\n"
 apt-get upgrade -y
 
 # install dependencies
-dependencies="git vim docker-ce make g++"
+dependencies="git vim docker-ce make g++ google-cloud-sdk"
 for app in ${dependencies}
 do
     printf "\n\n"
@@ -63,6 +69,10 @@ printf "${yellow}generating concourse keys..${normal}\n"
 printf "\n\n"
 printf "${yellow}unlocking repository..${normal}\n"
 git-crypt unlock ~/.ssh/infra.key
+
+printf "\n\n"
+printf "${yellow}initializing gcloud..${normal}\n"
+gcloud init --console-only --project ${gcloud_project_id}
 
 printf "\n\n"
 printf "${yellow}generating database init scripts..${normal}\n"
