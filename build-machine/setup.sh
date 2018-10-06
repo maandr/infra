@@ -69,6 +69,7 @@ printf "${yellow}generating concourse keys..${normal}\n"
 printf "\n\n"
 printf "${yellow}unlocking repository..${normal}\n"
 git-crypt unlock ~/.ssh/infra.key
+. ${project_dir}/.secrets
 
 printf "\n\n"
 printf "${yellow}initializing gcloud..${normal}\n"
@@ -80,7 +81,7 @@ printf "${yellow}generating database init scripts..${normal}\n"
 
 printf "\n\n"
 printf "${yellow}starting infrastructure..${normal}\n"
-./start.sh
+./restart.sh
 
 printf "\n\n"
 printf "${yellow}waiting for all components to have finished startup..${normal}\n"
@@ -93,6 +94,7 @@ printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
 
 printf "\n\n"
 printf "${yellow}setup cronjob for cetificate renewal..${normal}\n"
+crontab -r
 (crontab -l 2>/dev/null; echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh") | crontab -
 crontab -l
 
