@@ -11,3 +11,5 @@ docker exec mysql \
     sh -c "mkdir /var/lib/mysql/dumps; \
     exec mysqldump --all-databases -uroot -p${mysql_root_password} \
     | gzip > /var/lib/mysql/dumps/${datetime}.sql.gz"
+
+gsutil rsync -d /docker-volumes/mysql/dumps gs://maandr-backup-storage/mysql
