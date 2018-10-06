@@ -8,5 +8,6 @@ project_dir="$(dirname ${script_dir})"
 datetime=`date "+%d-%m-%Y-%H-%M-%S"`
 
 docker exec mysql \
-    sh -c "exec mysqldump --all-databases -uroot -p${mysql_root_password} \
+    sh -c "mkdir /var/lib/mysql/dumps; \
+    exec mysqldump --all-databases -uroot -p${mysql_root_password} \
     | gzip > /var/lib/mysql/dumps/date ${datetime}.sql.gz"
