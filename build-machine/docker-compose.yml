@@ -61,11 +61,11 @@ services:
     image: concourse/concourse
     command: worker
     privileged: true
-    links: [concourse-web]
-    depends_on: [concourse-web]
+    links: [ concourse-web ]
+    depends_on: [ concourse-web, concourse-web ]
     volumes:
       - ./keys/worker:/concourse-keys
     environment:
       - CONCOURSE_TSA_HOST=concourse-web:2222
       - CONCOURSE_GARDEN_NETWORK
-      - TSA_RETRY=true
+      - CONCOURSE_TSA_RETRY=true
