@@ -1,6 +1,6 @@
 # pathes
 export INFRA_DIR="${INFRA_DIR}"
-export BUILD_MACHINE_DIR="${INFRA_DIR}/build-machine"
+export BUILD_MACHINE_DIR="${BUILD_MACHINE_DIR}"
 
 # scripts
 alias start="${BUILD_MACHINE_DIR}/start.sh"

@@ -4,9 +4,10 @@ blue=$(tput setaf 4)
 normal=$(tput sgr0)
 
 script_dir=$(dirname $(readlink -f "$0"))
-INFRA_DIR="$(dirname ${script_dir})"
 
-export INFRA_DIR
+export INFRA_DIR="$(dirname ${script_dir})"
+export BUILD_MACHINE_DIR="${INFRA_DIR}/build-machine"
+
 bash_aliases=$(envsubst < "./.bash_aliases")
 
 printf "\n\n${blue}"
