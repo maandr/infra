@@ -93,11 +93,16 @@ printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
 ./request-ssl-certificates.sh
 
 printf "\n\n"
-printf "${yellow}setup cronjob for cetificate renewal..${normal}\n"
+printf "${yellow}setup cronjobs..${normal}\n"
 crontab -r
 (crontab -l 2>/dev/null; echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh") | crontab -
 (crontab -l 2>/dev/null; echo "0 4 * * * ${script_dir}/backup-mysql-databases.sh") | crontab -
 crontab -l
+
+
+printf "\n\n"
+printf "${yellow}configure .bashrc..${normal}\n"
+./configure-bashrc.sh
 
 printf "\n\n"
 printf "${green}success.${normal}\n"
