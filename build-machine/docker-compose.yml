@@ -41,7 +41,7 @@ services:
   
   concourse-web:
     container_name: concourse-web
-    image: concourse/concourse
+    image: concourse/concourse:4.0.0
     command: web
     links: [ concourse-db ]
     depends_on: [ concourse-db ]
@@ -58,7 +58,7 @@ services:
 
   concourse-worker:
     container_name: concourse-worker
-    image: concourse/concourse
+    image: concourse/concourse:4.0.0
     command: worker
     privileged: true
     links: [ concourse-web ]
