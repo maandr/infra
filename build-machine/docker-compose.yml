@@ -68,3 +68,4 @@ services:
     environment:
       - CONCOURSE_TSA_HOST=concourse-web:2222
       - CONCOURSE_GARDEN_NETWORK
+      - TSA_RETRY=true
