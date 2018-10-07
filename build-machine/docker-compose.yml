@@ -62,7 +62,7 @@ services:
     command: worker
     privileged: true
     links: [ concourse-web ]
-    depends_on: [ concourse-web, concourse-web ]
+    depends_on: [ concourse-web ]
     volumes:
       - ./keys/worker:/concourse-keys
     environment:
