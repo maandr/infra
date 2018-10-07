@@ -16,4 +16,4 @@ export concourse_db_password && \
 export concousre_external_url && \
 export concourse_user && \
 export concourse_password && \
-    docker-compose "$@"
+    docker-compose --file "${compose_file}" "$@"
