@@ -111,6 +111,10 @@ ufw allow https
 ufw allow 3306
 ufw status
 
+printf "\n\n"
+printf "${yellow}disable nginx ssl.conf..${normal}\n"
+mv ${script_dir}/config/nginx/ssl.conf ${script_dir}/config/nginx/ssl-disabled.conf
+
 
 printf "\n\n"
 printf "${yellow}starting infrastructure..${normal}\n"
@@ -124,6 +128,11 @@ sleep 10
 printf "\n\n"
 printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
 ./request-ssl-certificates.sh
+
+printf "\n\n"
+printf "${yellow}enable nginx ssl.conf..${normal}\n"
+mv ${script_dir}/config/nginx/ssl-disabled.conf ${script_dir}/config/nginx/ssl.conf
+./restart.sh
 
 printf "\n\n"
 printf "${yellow}setup cronjobs..${normal}\n"
