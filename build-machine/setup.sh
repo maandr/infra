@@ -17,7 +17,8 @@ printf " ---------------------------------------\n"
 
 printf "\n\n"
 printf "${yellow}install minimal dependencies..${normal}\n"
-apt-get install -y sudo curl apt-transport-https gnupg2 software-properties-common ca-certificates
+apt-get install -y sudo curl apt-transport-https gnupg2 \
+    software-properties-common ca-certificates libssl-dev make g++
 
 printf "\n\n"
 printf "${yellow}updating package cache..${normal}\n"
@@ -47,10 +48,7 @@ apt-get update
 printf "\n\n"
 printf "${yellow}updating packages to latest versions..${normal}\n"
 
-apt-get upgrade -y
-
-# install dependencies
-dependencies="git vim docker-ce make g++ google-cloud-sdk"
+dependencies="git vim docker-ce google-cloud-sdk"
 for app in ${dependencies}
 do
     printf "\n\n"
