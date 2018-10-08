@@ -105,6 +105,7 @@ ufw enable
 ufw allow ssh
 ufw allow http
 ufw allow https
+ufw allow 3306
 ufw status
 
 
