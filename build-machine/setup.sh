@@ -71,7 +71,7 @@ docker-compose --version
 
 printf "\n\n"
 printf "${yellow}installing git-crypt..${normal}\n"
-if ! [ hash git-crypt 2>/dev/null; ] then
+if ! [ hash git-crypt 2>/dev/null ]; then
     git clone https://www.agwa.name/git/git-crypt.git
     cd git-crypt
     make
