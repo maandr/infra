@@ -42,11 +42,9 @@ services:
   concourse-web:
     container_name: concourse-web
     image: concourse/concourse:4.0.0
-    command: web
+    command: quickstart
     links: [ concourse-db ]
     depends_on: [ concourse-db ]
-    volumes:
-      - ./keys/web:/concourse-keys
     environment:
       - CONCOURSE_POSTGRES_HOST=concourse-db
       - CONCOURSE_POSTGRES_USER=${concourse_db_username}
@@ -55,17 +53,3 @@ services:
       - CONCOURSE_EXTERNAL_URL=${concousre_external_url}
       - CONCOURSE_ADD_LOCAL_USER=${concourse_user}:${concourse_password}
       - CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS=true
-
-  concourse-worker:
-    container_name: concourse-worker
-    image: concourse/concourse:4.0.0
-    command: worker
-    privileged: true
-    links: [ concourse-web ]
-    depends_on: [ concourse-web ]
-    volumes:
-      - ./keys/worker:/concourse-keys
-    environment:
-      - CONCOURSE_TSA_HOST=concourse-web:2222
-      - CONCOURSE_GARDEN_NETWORK
-      - CONCOURSE_TSA_RETRY=true
