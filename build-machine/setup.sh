@@ -17,7 +17,7 @@ printf " ---------------------------------------\n"
 
 printf "\n\n"
 printf "${yellow}install minimal dependencies: sudo, curl..${normal}\n"
-apt-get install -y sudo, curl
+apt-get install -y sudo curl
 
 printf "\n\n"
 printf "${yellow}add additional package repositories..${normal}\n"
