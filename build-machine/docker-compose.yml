@@ -43,6 +43,7 @@ services:
     container_name: concourse-web
     image: concourse/concourse:4.0.0
     command: quickstart
+    privileged: true
     links: [ concourse-db ]
     depends_on: [ concourse-db ]
     environment:
