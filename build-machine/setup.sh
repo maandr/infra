@@ -17,7 +17,7 @@ printf " ---------------------------------------\n"
 
 printf "\n\n"
 printf "${yellow}install minimal dependencies..${normal}\n"
-apt-get install -y sudo curl apt-transport-https gnupg2 \
+apt-get install -y sudo curl apt-transport-https gnupg2 ufw \
     software-properties-common ca-certificates libssl-dev make g++
 
 printf "\n\n"
@@ -96,6 +96,15 @@ gcloud init --console-only --project ${gcloud_project_id}
 printf "\n\n"
 printf "${yellow}generating database init scripts..${normal}\n"
 ./generate-initdb.sh
+
+printf "\n\n"
+printf "${yellow}allowing connections on port 80 and 443..${normal}\n"
+ufw enable
+ufw allow ssh
+ufw allow http
+ufw allow https
+ufw status
+
 
 printf "\n\n"
 printf "${yellow}starting infrastructure..${normal}\n"
