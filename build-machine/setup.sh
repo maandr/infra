@@ -71,12 +71,14 @@ docker-compose --version
 
 printf "\n\n"
 printf "${yellow}installing git-crypt..${normal}\n"
-git clone https://www.agwa.name/git/git-crypt.git
-cd git-crypt
-make
-make install
-cd ..
-rm -rf git-crypt
+if ! [ hash git-crypt 2>/dev/null; ] then
+    git clone https://www.agwa.name/git/git-crypt.git
+    cd git-crypt
+    make
+    make install
+    cd ..
+    rm -rf git-crypt
+fi
 printf "\ninstalled version: "
 git-crypt --version
 
