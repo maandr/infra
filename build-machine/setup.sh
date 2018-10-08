@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 blue=$(tput setaf 4)
 yellow=$(tput setaf 3)
 green=$(tput setaf 2)
@@ -12,6 +14,10 @@ project_dir="$(dirname ${script_dir})"
 printf " ---------------------------------------\n"
 printf " ${yellow}setup machine for infra${normal}\n"
 printf " ---------------------------------------\n"
+
+printf "\n\n"
+printf "${yellow}install curl..${normal}\n"
+apt-get install -y curl
 
 printf "\n\n"
 printf "${yellow}add additional package repositories..${normal}\n"
