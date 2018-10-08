@@ -16,14 +16,28 @@ printf " ${yellow}setup machine for infra${normal}\n"
 printf " ---------------------------------------\n"
 
 printf "\n\n"
-printf "${yellow}install minimal dependencies: sudo, curl..${normal}\n"
-apt-get install -y sudo curl
+printf "${yellow}install minimal dependencies..${normal}\n"
+apt-get install -y sudo curl apt-transport-https gnupg2 software-properties-common ca-certificates
+
+printf "\n\n"
+printf "${yellow}updating package cache..${normal}\n"
+
+apt-get update
 
 printf "\n\n"
 printf "${yellow}add additional package repositories..${normal}\n"
+
+# google-gloud-sdk
 CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+# docker-ce
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+apt-key fingerprint 0EBFCD88
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
 
 printf "\n\n"
 printf "${yellow}updating package cache..${normal}\n"
