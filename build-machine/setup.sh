@@ -62,16 +62,18 @@ done
 
 printf "\n\n"
 printf "${yellow}installing docker-compose..${normal}\n"
-curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" \
-    -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+if ! [ -x "$(command -v docker-compose)" ]; then
+    curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" \
+        -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+fi
 
 printf "\ninstalled version: "
 docker-compose --version
 
 printf "\n\n"
 printf "${yellow}installing git-crypt..${normal}\n"
-if ! [ hash git-crypt 2>/dev/null ]; then
+if ! [ -x "$(command -v git-crypt)" ]; then
     git clone https://www.agwa.name/git/git-crypt.git
     cd git-crypt
     make
@@ -79,6 +81,7 @@ if ! [ hash git-crypt 2>/dev/null ]; then
     cd ..
     rm -rf git-crypt
 fi
+
 printf "\ninstalled version: "
 git-crypt --version
 
