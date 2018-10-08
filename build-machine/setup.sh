@@ -113,7 +113,8 @@ ufw status
 
 printf "\n\n"
 printf "${yellow}disable nginx ssl.conf..${normal}\n"
-mv ${script_dir}/config/nginx/ssl/ssl.conf ${script_dir}/config/nginx/ssl.conf
+mv ${script_dir}/config/nginx/ssl/maandr.de.conf ${script_dir}/config/nginx/ssl/.maandr.de.conf
+mv ${script_dir}/config/nginx/ssl/ci.maandr.de.conf ${script_dir}/config/nginx/ssl/.ci.maandr.de.conf
 
 
 printf "\n\n"
@@ -122,16 +123,18 @@ printf "${yellow}starting infrastructure..${normal}\n"
 
 printf "\n\n"
 printf "${yellow}waiting for all components to have finished startup..${normal}\n"
-sleep 10
+sleep 15
 ./status.sh
 
 printf "\n\n"
 printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
+exit 0
 ./request-ssl-certificates.sh
 
 printf "\n\n"
 printf "${yellow}enable nginx ssl.conf..${normal}\n"
-mv ${script_dir}/config/nginx/ssl.conf ${script_dir}/config/nginx/ssl/ssl.conf
+mv ${script_dir}/config/nginx/ssl/.maandr.de.conf ${script_dir}/config/nginx/ssl/maandr.de.conf
+mv ${script_dir}/config/nginx/ssl/.ci.maandr.de.conf ${script_dir}/config/nginx/ssl/ci.maandr.de.conf
 ./restart.sh
 
 printf "\n\n"
