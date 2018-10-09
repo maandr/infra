@@ -141,8 +141,10 @@ printf "${yellow}setup cronjobs..${normal}\n"
 if crontab -l > /dev/null 2>&1; then
     crontab -r
 fi
-(crontab -l 2>/dev/null; echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh") | crontab -
-(crontab -l 2>/dev/null; echo "0 4 * * * ${script_dir}/backup-mysql-databases.sh") | crontab -
+(crontab -l 2>/dev/null; \
+    echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh"; \
+    echo "0 4 * * * ${script_dir}/backup-mysql-databases.sh"; \
+) | crontab -
 crontab -l
 
 
