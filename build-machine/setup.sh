@@ -128,7 +128,6 @@ sleep 15
 
 printf "\n\n"
 printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
-exit 0
 ./request-ssl-certificates.sh
 
 printf "\n\n"
