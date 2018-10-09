@@ -62,7 +62,7 @@ done
 
 printf "\n\n"
 printf "${yellow}installing docker-compose..${normal}\n"
-if ! [ -x "$(command -v docker-compose)" ]; then
+if ! docker-compose --version > /dev/null 2>&1; then
     curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" \
         -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
@@ -138,7 +138,9 @@ mv ${script_dir}/config/nginx/ssl/.ci.maandr.de.conf ${script_dir}/config/nginx/
 
 printf "\n\n"
 printf "${yellow}setup cronjobs..${normal}\n"
-crontab -r
+if crontab -l > /dev/null 2>&1; then
+    crontab -r
+fi
 (crontab -l 2>/dev/null; echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh") | crontab -
 (crontab -l 2>/dev/null; echo "0 4 * * * ${script_dir}/backup-mysql-databases.sh") | crontab -
 crontab -l
