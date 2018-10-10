@@ -18,7 +18,6 @@ docker run -it --rm \
     -v ${script_dir}/static:/static \
     certbot/certbot \
     certonly \
-    --staging \
     --webroot \
     --email ${letsencrypt_admin_email} --agree-tos \
     --webroot-path=/static \

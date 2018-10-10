@@ -86,10 +86,6 @@ printf "\ninstalled version: "
 git-crypt --version
 
 printf "\n\n"
-printf "${yellow}generating concourse keys..${normal}\n"
-./generate-keys.sh
-
-printf "\n\n"
 printf "${yellow}unlocking repository..${normal}\n"
 git-crypt unlock ~/.ssh/infra.key
 . ${project_dir}/.secrets
@@ -141,10 +137,7 @@ printf "${yellow}setup cronjobs..${normal}\n"
 if crontab -l > /dev/null 2>&1; then
     crontab -r
 fi
-(crontab -l 2>/dev/null; \
-    echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh"; \
-    echo "0 4 * * * ${script_dir}/backup-mysql-databases.sh"; \
-) | crontab -
+(echo "0 23 * * * ${script_dir}/renew-ssl-certificates.sh"; echo "0 4 * * * ${script_dir}/backup-mysql-databases.sh";) | crontab -
 crontab -l
 
 
