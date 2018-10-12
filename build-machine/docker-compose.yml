@@ -54,4 +54,7 @@ services:
       - CONCOURSE_EXTERNAL_URL=${concousre_external_url}
       - CONCOURSE_ADD_LOCAL_USER=${concourse_user}:${concourse_password}
       - CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS=true
-      - CONCOURSE_GARDEN_DNS_SERVER=8.8.8.8
+      - CONCOURSE_GARDEN_DNS_SERVER=46.38.225.230
+    dns:
+      - 46.38.225.230
+      - 46.38.252.230
