@@ -41,12 +41,15 @@ printf "${yellow}updating package cache..${normal}\n"
 
 apt-get update
 
-printf "\n\n"
-printf "${yellow}uninstall apache2 if exists..${normal}\n"
 
-service apache2 stop
-apt-get purge apache2 apache2-utils apache2.2-bin
-apt-get autoremove
+if systemctl is-active --quiet apache2; then
+    printf "\n\n"
+    printf "${yellow}stop and remove apache2..${normal}\n"
+
+    service apache2 stop
+    apt-get purge apache2 apache2-utils apache2.2-bin
+    apt-get autoremove
+fi
 
 printf "\n\n"
 printf "${yellow}installing dependencies..${normal}\n"
