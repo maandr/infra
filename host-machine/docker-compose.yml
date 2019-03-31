@@ -5,6 +5,8 @@ services:
   nginx:
     image: nginx:alpine
     container_name: reverse-proxy
+    depends_on: [ weidelandschaften-de ]
+    links: [ weidelandschaften-de ]
     restart: always
     ports:
       - "80:80"
