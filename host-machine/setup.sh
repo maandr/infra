@@ -42,6 +42,13 @@ printf "${yellow}updating package cache..${normal}\n"
 apt-get update
 
 printf "\n\n"
+printf "${yellow}uninstall apache2 if exists..${normal}\n"
+
+service apache2 stop
+apt-get purge apache2 apache2-utils apache2.2-bin apache2-common
+apt-get autoremove
+
+printf "\n\n"
 printf "${yellow}installing dependencies..${normal}\n"
 
 dependencies="git vim docker-ce"
