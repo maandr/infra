@@ -118,7 +118,7 @@ printf "${yellow}starting infrastructure..${normal}\n"
 ./restart.sh
 
 printf "\n\n"
-printf "${yellow}waiting for all components to have finished startup..${normal}\n"
+printf "${yellow}waiting for all components to complete startup..${normal}\n"
 sleep 15
 ./status.sh
 

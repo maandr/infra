@@ -79,3 +79,32 @@ ufw allow http
 ufw allow https
 ufw allow 3306
 ufw status
+
+printf "\n\n"
+printf "${yellow}disable nginx ssl.conf..${normal}\n"
+mv ${script_dir}/config/nginx/ssl/maandr.de.conf ${script_dir}/config/nginx/ssl/.maandr.de.conf
+mv ${script_dir}/config/nginx/ssl/ci.maandr.de.conf ${script_dir}/config/nginx/ssl/.ci.maandr.de.conf
+
+printf "\n\n"
+printf "${yellow}starting infrastructure..${normal}\n"
+./start.sh
+
+printf "\n\n"
+printf "${yellow}waiting for all components complete startup..${normal}\n"
+sleep 15
+./status.sh
+
+printf "\n\n"
+printf "${yellow}fechting ssl-certificates with letsencrypt..${normal}\n"
+./request-ssl-certificates.sh
+
+printf "\n\n"
+printf "${yellow}enable nginx ssl.conf..${normal}\n"
+mv ${script_dir}/config/nginx/ssl/.maandr.de.conf ${script_dir}/config/nginx/ssl/maandr.de.conf
+mv ${script_dir}/config/nginx/ssl/.ci.maandr.de.conf ${script_dir}/config/nginx/ssl/ci.maandr.de.conf
+./restart.sh
+
+printf "\n\n"
+printf "${green}success.${normal}\n"
+
+exit 0
