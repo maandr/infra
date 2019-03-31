@@ -37,6 +37,25 @@ add-apt-repository \
    stable"
 
 printf "\n\n"
+printf "${yellow}installing git-crypt..${normal}\n"
+if ! [ -x "$(command -v git-crypt)" ]; then
+    git clone https://www.agwa.name/git/git-crypt.git
+    cd git-crypt
+    make
+    make install
+    cd ..
+    rm -rf git-crypt
+fi
+
+printf "\ninstalled version: "
+git-crypt --version
+
+printf "\n\n"
+printf "${yellow}unlocking repository..${normal}\n"
+git-crypt unlock ~/.ssh/infra.key
+. ${project_dir}/.secrets
+
+printf "\n\n"
 printf "${yellow}updating package cache..${normal}\n"
 
 apt-get update
@@ -44,11 +63,14 @@ apt-get update
 
 if systemctl is-active --quiet apache2; then
     printf "\n\n"
-    printf "${yellow}stop and remove apache2..${normal}\n"
-
+    printf "${yellow}stoping apache2..${normal}\n"
     service apache2 stop
-    apt-get purge apache2 apache2-utils apache2.2-bin
-    apt-get autoremove
+fi
+
+if systemctl is-active --quiet lighttpd; then
+    printf "\n\n"
+    printf "${yellow}stoping lighttpd..${normal}\n"
+    service apache2 lighttpd
 fi
 
 printf "\n\n"
