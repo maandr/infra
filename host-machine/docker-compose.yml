@@ -6,8 +6,6 @@ services:
     image: nginx:alpine
     container_name: reverse-proxy
     restart: always
-    depends_on: [ concourse-web ]
-    links: [ concourse-web ]
     ports:
       - "80:80"
       - "443:443"

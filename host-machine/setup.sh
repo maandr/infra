@@ -64,6 +64,14 @@ do
 done
 
 printf "\n\n"
+printf "${yellow}installing docker-compose..${normal}\n"
+if ! docker-compose --version > /dev/null 2>&1; then
+    curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" \
+        -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+fi
+
+printf "\n\n"
 printf "${yellow}allowing connections on port 80 and 443..${normal}\n"
 ufw enable
 ufw allow ssh
