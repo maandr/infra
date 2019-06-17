@@ -21,7 +21,7 @@ docker run -it --rm \
     --webroot \
     --email ${letsencrypt_admin_email} --agree-tos \
     --webroot-path=/static \
-    -d www.weidelandschaften.de
+    -d www.weidelandschaften.de \
     -d etiketten.weidelandschaften.de
 
 exit 0
