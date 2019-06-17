@@ -5,8 +5,8 @@ services:
   nginx:
     image: nginx:alpine
     container_name: reverse-proxy
-    depends_on: [ weidelandschaften-de ]
-    links: [ weidelandschaften-de ]
+    depends_on: [ weidelandschaften-de, galloway-labels ]
+    links: [ weidelandschaften-de, galloway-labels ]
     restart: always
     ports:
       - "80:80"
@@ -21,3 +21,7 @@ services:
   weidelandschaften-de:
     image: wland/weidelandschaften-de
     container_name: weidelandschaften-de
+
+  galloway-labels:
+    image: wland/wl-label-tool
+    container_name: galloway-labels
