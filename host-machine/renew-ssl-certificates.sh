@@ -11,7 +11,7 @@ normal=$(tput sgr0)
 
 printf "\n\n"
 printf "${yellow}disable nginx ssl.conf..${normal}\n"
-mv ${script_dir}/config/nginx/ssl/.de.conf ${script_dir}/config/nginx/ssl/..de.conf
+mv ${script_dir}/config/nginx/ssl/weidelandschaften.de.conf ${script_dir}/config/nginx/ssl/.weidelandschaften.de.conf
 
 printf "\n\n"
 printf "${yellow}starting infrastructure..${normal}\n"
